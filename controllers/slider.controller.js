@@ -1,11 +1,11 @@
 const db = require("../models");
-const General = db.general;
+const Slider = db.slider;
 const Op = db.Sequelize.Op;
 const fs = require('fs');
 
 function saveImage(baseImage) {
     const uploadPath = "./";
-    const localPath = `${uploadPath}/uploads/images/slider/`;
+    const localPath = `${uploadPath}uploads/images/slider/`;
     const ext = baseImage.substring(baseImage.indexOf("/")+1, baseImage.indexOf(";base64"));
     const fileType = baseImage.substring("data:".length,baseImage.indexOf("/"));
     const regex = new RegExp(`^data:${fileType}\/${ext};base64,`, 'gi');
@@ -19,29 +19,16 @@ function saveImage(baseImage) {
         fs.mkdirSync(localPath);
     }
     fs.writeFileSync(localPath+filename, base64Data, 'base64');
-    return {filename, localPath};
+    return {pathImage: `${localPath}${filename}`, idImage: rand};
 }
 
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
 
-    const {numberOrder, images, numberPhone} = req.body;
-    // Validate request
-    if (!numberOrder) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
-
-    // Create a General
-    const general = {
-        numberOrder: numberOrder,
-        numberPhone: numberPhone
-    };
-
+    const {image} = req.body;
+    const dataImage = saveImage(image.image);
     // Save Tutorial in the database
-    General.create(general)
+    Slider.create(dataImage)
         .then(data => {
             res.send(data);
         })
@@ -54,10 +41,12 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-    const {numberOrder, numberPhone} = req.body;
+    const {numberOrder, images, numberPhone} = req.body;
+    saveImage(images);
 
-    General.update({
+    Slider.update({
         numberOrder: numberOrder,
+        images: saveImage(images),
         numberPhone: numberPhone
     }, {where: {id: 1}})
         .then((response) => {
@@ -67,10 +56,8 @@ exports.update = (req, res) => {
 
 // Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {
-    const numberOrder = req.query.numberOrder;
-    const condition = numberOrder ? {title: {[Op.like]: `%${numberOrder}%`}} : null;
 
-    General.findAll({where: condition})
+    Slider.findAll()
         .then(data => {
             res.send(data);
         })

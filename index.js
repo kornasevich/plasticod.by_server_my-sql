@@ -57,6 +57,8 @@ const corsOptions = {
 
 app.use(bodyParser.json({limit: '40mb', extended: true}));
 app.use(bodyParser.urlencoded({limit: '40mb', extended: true}));
+app.use(express.static("uploads"));
+/*app.use(express.static(path.join(__dirname, 'uploads')));*/
 app.use(cors());
 
 app.use(cors(corsOptions));
@@ -78,6 +80,7 @@ db.sequelize.sync();
 require("./routes/tutorial.routes")(app);
 require("./routes/general.routes")(app);
 require("./routes/social.routes")(app);
+require("./routes/slider.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 5000;
