@@ -1,6 +1,7 @@
 const db = require("../models");
 const Slider = db.slider;
 const Op = db.Sequelize.Op;
+const path = require('path');
 const fs = require('fs');
 
 function saveImage(baseImage) {
@@ -19,7 +20,7 @@ function saveImage(baseImage) {
         fs.mkdirSync(localPath);
     }
     fs.writeFileSync(localPath+filename, base64Data, 'base64');
-    return {pathImage: `${localPath}${filename}`, idImage: rand};
+    return {pathImage: `${__dirname.split('controllers')[0]}${localPath}${filename}`, idImage: rand};
 }
 
 // Create and Save a new Tutorial
@@ -29,6 +30,24 @@ exports.create = (req, res) => {
     const dataImage = saveImage(image.image);
     // Save Tutorial in the database
     Slider.create(dataImage)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while creating the Tutorial."
+            });
+        });
+};
+
+// Create and Save a new Tutorial
+exports.insert = (req, res) => {
+
+    const {image} = req.body;
+    const dataImage = saveImage(image.image);
+    // Save Tutorial in the database
+    Slider.upsert(dataImage)
         .then(data => {
             res.send(data);
         })

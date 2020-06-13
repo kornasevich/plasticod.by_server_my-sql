@@ -5,6 +5,7 @@ module.exports = app => {
 
     // Create a new Tutorial
     router.post("/", slider.create);
+    router.post("/add", slider.insert);
 
     router.put("/update", slider.update);
 
