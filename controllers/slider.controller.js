@@ -1,7 +1,5 @@
 const db = require("../models");
 const Slider = db.slider;
-const Op = db.Sequelize.Op;
-const path = require('path');
 const fs = require('fs');
 
 function saveImage(baseImage) {
@@ -20,7 +18,7 @@ function saveImage(baseImage) {
         fs.mkdirSync(localPath);
     }
     fs.writeFileSync(localPath+filename, base64Data, 'base64');
-    return {pathImage: `${__dirname.split('controllers')[0]}${localPath}${filename}`, idImage: rand};
+    return {pathImage: `${__dirname.split('controllers')[0]}${localPath.split('./')[1]}${filename}`, idImage: rand};
 }
 
 // Create and Save a new Tutorial

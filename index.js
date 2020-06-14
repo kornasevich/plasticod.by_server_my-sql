@@ -81,6 +81,7 @@ require("./routes/tutorial.routes")(app);
 require("./routes/general.routes")(app);
 require("./routes/social.routes")(app);
 require("./routes/slider.routes")(app);
+require("./routes/groups.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 5000;
