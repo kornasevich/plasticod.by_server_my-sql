@@ -24,5 +24,6 @@ db.general = require("./general.model.js")(sequelize, Sequelize);
 db.social = require("./social.model.js")(sequelize, Sequelize);
 db.slider = require("./slider.model.js")(sequelize, Sequelize);
 db.groups = require("./groups.model.js")(sequelize, Sequelize);
+db.product = require("./product.model.js")(sequelize, Sequelize);
 
 module.exports = db;
