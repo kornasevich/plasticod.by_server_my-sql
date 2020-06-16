@@ -11,7 +11,7 @@ const mail = require('./service/postMail');
 const mailer = require('./service/nodemailer');
 const general = require('./routes/api/general');
 const about = require('./routes/api/about');
-const exampleUsing = require('./routes/api/example-using');
+const exampleUsing = require('./routes/api/example.routes.js');
 const addressHipping = require('./routes/api/address-shipping');
 const buyRetail = require('./routes/api/buy-retail');
 const contacts = require('./routes/api/contacts');
@@ -30,7 +30,7 @@ app.use('/api/news', news);
 app.use('/api/user', user);
 app.use('/api/general', general);
 app.use('/api/about', about);
-app.use('/api/example-using', exampleUsing);
+app.use('/api/example.routes.js', exampleUsing);
 app.use('/api/address-shipping', addressHipping);
 app.use('/api/buy-retail', buyRetail);
 app.use('/api/contacts', contacts);
@@ -83,6 +83,8 @@ require("./routes/social.routes")(app);
 require("./routes/slider.routes")(app);
 require("./routes/groups.routes")(app);
 require("./routes/product.routes")(app);
+require("./routes/about.routes")(app);
+require("./routes/example.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 5000;
