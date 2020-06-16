@@ -60,6 +60,7 @@ app.use(bodyParser.urlencoded({limit: '40mb', extended: true}));
 app.use(express.static("uploads"));
 /*app.use(express.static(path.join(__dirname, 'uploads')));*/
 app.use(cors());
+console.log(__dirname);
 
 app.use(cors(corsOptions));
 
