@@ -1,27 +1,6 @@
 const db = require("../models");
 const General = db.general;
 const Op = db.Sequelize.Op;
-const fs = require('fs');
-
-function saveImage(baseImage) {
-    const uploadPath = "./";
-    const localPath = `${uploadPath}/uploads/images/slider/`;
-    const ext = baseImage.substring(baseImage.indexOf("/")+1, baseImage.indexOf(";base64"));
-    const fileType = baseImage.substring("data:".length,baseImage.indexOf("/"));
-    const regex = new RegExp(`^data:${fileType}\/${ext};base64,`, 'gi');
-    const base64Data = baseImage.replace(regex, "");
-    const rand = Math.ceil(Math.random()*1000);
-    const filename = `Photo_${Date.now()}_${rand}.${ext}`;
-    if(!fs.existsSync(`${uploadPath}/uploads/`)) {
-        fs.mkdirSync(`${uploadPath}/uploads/`);
-    }
-    if (!fs.existsSync(localPath)) {
-        fs.mkdirSync(localPath);
-    }
-    fs.writeFileSync(localPath+filename, base64Data, 'base64');
-    return {filename, localPath};
-}
-
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
 
