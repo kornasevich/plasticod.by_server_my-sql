@@ -86,6 +86,8 @@ require("./routes/groups.routes")(app);
 require("./routes/product.routes")(app);
 require("./routes/about.routes")(app);
 require("./routes/example.routes")(app);
+require("./routes/news.routes")(app);
+require("./routes/address.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 5000;
