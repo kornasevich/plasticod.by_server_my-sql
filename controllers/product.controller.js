@@ -19,6 +19,9 @@ exports.insert = (req, res) => {
         weight: weight
     })
         .then(data => {
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "*");
+            res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             res.send(data);
         })
         .catch(err => {
@@ -32,6 +35,9 @@ exports.insert = (req, res) => {
 exports.findAll = (req, res) => {
     Product.findAll()
         .then(data => {
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "*");
+            res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             res.send(data);
         })
         .catch(err => {
@@ -60,6 +66,9 @@ exports.updateProduct = (req, res) => {
         },
         {where: {id: id}})
         .then(data => {
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "*");
+            res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             res.send(data);
         })
         .catch(err => {

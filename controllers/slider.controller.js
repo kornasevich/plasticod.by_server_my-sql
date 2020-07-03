@@ -28,6 +28,9 @@ exports.insert = (req, res) => {
     const dataImage = saveImage(image.image);
     Slider.upsert(dataImage)
         .then(data => {
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "*");
+            res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             res.send(data);
         })
         .catch(err => {
@@ -40,9 +43,12 @@ exports.insert = (req, res) => {
 
 exports.delete = (req, res) => {
     const {id} = req.body;
-
+    console.log(id)
     Slider.destroy({where: {id: id}})
         .then((response) => {
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "*");
+            res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             res.send(response)
         })
 };
@@ -52,6 +58,9 @@ exports.findAll = (req, res) => {
 
     Slider.findAll()
         .then(data => {
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "*");
+            res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             res.send(data);
         })
         .catch(err => {

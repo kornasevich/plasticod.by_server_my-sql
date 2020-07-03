@@ -39,6 +39,9 @@ exports.create = (req, res) => {
     // Save Tutorial in the database
     Social.create(social)
         .then(data => {
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "*");
+            res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             res.send(data);
         })
         .catch(err => {
@@ -57,6 +60,9 @@ exports.update = (req, res) => {
 
     Social.update(socials, {where: {id: 1}})
         .then((response) => {
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "*");
+            res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             res.send(response)
         })
 };
@@ -66,6 +72,9 @@ exports.findAll = (req, res) => {
 
     Social.findAll({where: {id: 1}})
         .then(data => {
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "*");
+            res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             res.send(data);
         })
         .catch(err => {

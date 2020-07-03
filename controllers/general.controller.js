@@ -7,6 +7,9 @@ exports.create = (req, res) => {
     const {numberOrder, images, numberPhone} = req.body;
     // Validate request
     if (!numberOrder) {
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Methods", "*");
+        res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         res.status(400).send({
             message: "Content can not be empty!"
         });
@@ -22,6 +25,9 @@ exports.create = (req, res) => {
     // Save Tutorial in the database
     General.create(general)
         .then(data => {
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "*");
+            res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             res.send(data);
         })
         .catch(err => {
@@ -33,13 +39,15 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-    const {numberOrder, numberPhone} = req.body;
+    const {numberPhone} = req.body;
 
     General.update({
-        numberOrder: numberOrder,
         numberPhone: numberPhone
     }, {where: {id: 1}})
         .then((response) => {
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "*");
+            res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             res.send(response)
         })
 };
@@ -51,6 +59,9 @@ exports.findAll = (req, res) => {
 
     General.findAll({where: condition})
         .then(data => {
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "*");
+            res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             res.send(data);
         })
         .catch(err => {

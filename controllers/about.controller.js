@@ -9,6 +9,9 @@ const {text} = req.body;
         text: text
     })
         .then(data => {
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "*");
+            res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             res.send(data);
         })
         .catch(err => {
@@ -26,6 +29,9 @@ exports.update = (req, res) => {
         text: text
     }, {where: {id: 1}})
         .then((response) => {
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "*");
+            res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             res.send(response)
         })
 };
@@ -34,6 +40,9 @@ exports.update = (req, res) => {
 exports.findAll = (req, res) => {
     About.findAll({where: 1})
         .then(data => {
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "*");
+            res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             res.send(data);
         })
         .catch(err => {

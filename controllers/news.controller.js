@@ -8,6 +8,9 @@ exports.insert = (req, res) => {
         description: description
     })
         .then(data => {
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "*");
+            res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             res.send(data);
         })
         .catch(err => {
@@ -21,6 +24,9 @@ exports.insert = (req, res) => {
 exports.findAll = (req, res) => {
     News.findAll()
         .then(data => {
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "*");
+            res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             res.send(data);
         })
         .catch(err => {
@@ -32,13 +38,16 @@ exports.findAll = (req, res) => {
 };
 
 exports.updateNew = (req, res) => {
-    const {description} = req.body;
+    const {description, id} = req.body;
     News.update(
         {
             description: description
         },
         {where: {id: id}})
         .then(data => {
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "*");
+            res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             res.send(data);
         })
         .catch(err => {
@@ -55,6 +64,9 @@ exports.delete = (req, res) => {
         where: {id: Number(id)}
     })
         .then(data => {
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "*");
+            res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             res.send(data);
         })
         .catch(err => {

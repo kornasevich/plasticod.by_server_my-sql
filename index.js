@@ -47,36 +47,38 @@ app.listen(port, ()=>console.log(`server start on port ${port}`));
 
 const express = require("express");
 const bodyParser = require("body-parser");
+const serveStatic = require('serve-static');
+const path = require('path');
+const history = require('connect-history-api-fallback');
 const cors = require("cors");
 
 const app = express();
-
 const corsOptions = {
     origin: "http://localhost:8080"
 };
+app.use(cors());
+app.use(cors(corsOptions));
+/*app.use(express.static(path.join(__dirname, 'public')));
+app.use('/*', express.static(__dirname + '/public'));
+
+app.get('/*', (req, res) => {
+  res.sendFile(__dirname, '/public/index.html');
+});
+app.use(history({
+  disableDotRule: true,
+  verbose: true
+}));*/
+
+// app.use(express.static("uploads"));
 
 app.use(bodyParser.json({limit: '40mb', extended: true}));
 app.use(bodyParser.urlencoded({limit: '40mb', extended: true}));
-app.use(express.static("uploads"));
-/*app.use(express.static(path.join(__dirname, 'uploads')));*/
-app.use(cors());
-console.log(__dirname);
-
-app.use(cors(corsOptions));
-
-// parse requests of content-type - application/json
 app.use(bodyParser.json());
-
-// parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require("./models");
 
 db.sequelize.sync();
-// // drop the table if it already exists
-// db.sequelize.sync({ force: true }).then(() => {
-//   console.log("Drop and re-sync db.");
-// });
 
 require("./routes/tutorial.routes")(app);
 require("./routes/general.routes")(app);
@@ -88,9 +90,11 @@ require("./routes/about.routes")(app);
 require("./routes/example.routes")(app);
 require("./routes/news.routes")(app);
 require("./routes/address.routes")(app);
+require("./routes/user.routes")(app);
 
+
+/*const hostname = 'plasticod.by';
 // set port, listen for requests
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}.`);
-});
+const PORT = process.env.PORT || 8080;*/
+app.listen(8080);
+

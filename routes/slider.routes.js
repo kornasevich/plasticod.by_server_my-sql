@@ -4,7 +4,7 @@ module.exports = app => {
     const router = require("express").Router();
     router.post("/", slider.insert);
 
-    router.delete('/', slider.delete);
+    router.post('/delete-slide', slider.delete);
 
     // Retrieve all Tutorials
     router.get("/", slider.findAll);

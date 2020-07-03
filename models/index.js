@@ -29,5 +29,6 @@ db.about = require("./about.model.js")(sequelize, Sequelize);
 db.example = require("./example.model.js")(sequelize, Sequelize);
 db.news = require("./news.model.js")(sequelize, Sequelize);
 db.address = require("./address.model.js")(sequelize, Sequelize);
+db.user = require("./user.model.js")(sequelize, Sequelize);
 
 module.exports = db;

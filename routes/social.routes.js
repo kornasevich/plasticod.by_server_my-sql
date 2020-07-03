@@ -6,7 +6,7 @@ module.exports = app => {
     // Create a new Tutorial
     router.post("/", social.create);
 
-    router.put("/update", social.update);
+    router.post("/update", social.update);
 
     // Retrieve all Tutorials
     router.get("/", social.findAll);
